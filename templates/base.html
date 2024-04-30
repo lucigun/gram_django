@@ -1,0 +1,20 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- meta tag-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1", shrink-to-fit="no">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- priject css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title> hello pybo</title>
+</head>
+<body>
+<!-- 기본템플릿안에 추가 되는 내용-->
+{% block content %}
+{% endblock %}
+<!-- 추가되는 내용 end -->
+</body>
+</html>
