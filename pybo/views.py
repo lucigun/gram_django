@@ -1,9 +1,10 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Question
-from .forms import QuestionForm
+from .forms import QuestionForm, AnswerForm
 # Create your views here.
 
 def index(request) :
@@ -17,9 +18,22 @@ def detail(request, question_id):
     return render(request, 'pybo/question_detail.html', context)
 
 def answer_create(request, question_id):
+    """"
+    파이보 답변등록
+    """
     question = get_object_or_404(Question, pk=question_id)
-    question.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
-    return redirect('pybo:detail', question_id=question.id)
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.create_date = timezone.now()
+            answer.question = question
+            answer.save()
+            return redirect('pybo:detail', question_id=question.id)
+        else:
+            return HttpResponseNotAllowed('ONLY POST IS AVAILABLE')
+    context = {'question': question, 'form':form}
+    return render(request, 'pybo/question_detail.html', context)
 
 def question_create(request):
     if request.method == 'POST':
@@ -33,4 +47,5 @@ def question_create(request):
         form = QuestionForm()
     context = {'form':form}
     return render(request, 'pybo/question_form.html', context)
+
 
