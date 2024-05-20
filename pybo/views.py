@@ -32,7 +32,7 @@ def answer_create(request, question_id):
             return redirect('pybo:detail', question_id=question.id)
         else:
             return HttpResponseNotAllowed('ONLY POST IS AVAILABLE')
-    context = {'question': question, 'form':form}
+    context = {'question': question, 'form': form}
     return render(request, 'pybo/question_detail.html', context)
 
 def question_create(request):
