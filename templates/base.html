@@ -12,9 +12,16 @@
     <title> hello pybo</title>
 </head>
 <body>
+<!--네비게이션바S-->
+{% include "navbar.html" %}
+<!--네비게이션바E-->
 <!-- 기본템플릿안에 추가 되는 내용-->
 {% block content %}
 {% endblock %}
 <!-- 추가되는 내용 end -->
+<!-- 부트스트랩 js S-->
+<script src="{% static 'bootstrap.min.js' %}"></script>
+<script
+<!-- 부트스트랩 js E-->
 </body>
 </html>
